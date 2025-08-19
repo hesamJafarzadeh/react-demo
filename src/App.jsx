@@ -1,9 +1,12 @@
 import "./App.css";
+import ProductList from "./components/products/ProductList";
 
 console.log("APP");
 function App() {
   return (
-    <div className="h-screen w-screen flex items-center justify-center text-4xl font-bold"></div>
+    <div className="container mx-auto">
+      <ProductList />
+    </div>
   );
 }
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import BaseInputErrors from "../base/BaseInputErrors";
+import { loginValidationRules } from "../../validations/authValidations";
 
 export default function () {
   // navigator
@@ -47,13 +48,7 @@ export default function () {
             type="text"
             placeholder="Email"
             className="input"
-            {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                message: "Invalid email address",
-              },
-            })}
+            {...register("email", loginValidationRules.email)}
           />
           {/* show error */}
           {errors.email && <BaseInputErrors error={errors.email.message} />}
@@ -66,7 +61,7 @@ export default function () {
             type="password"
             placeholder="Enter Your Password ..."
             className="input"
-            {...register("password", { required: true })}
+            {...register("password", loginValidationRules.password)}
           />
           {/* show errors */}
           {errors.password && (
