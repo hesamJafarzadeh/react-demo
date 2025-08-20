@@ -1,13 +1,9 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import BaseInputErrors from "../base/BaseInputErrors";
 import { loginValidationRules } from "../../validations/authValidations";
 
-export default function () {
-  // navigator
-  let navigate = useNavigate();
-
+export default function ({ formHasError, onSubmitForm }) {
   //   validation
   const {
     register,
@@ -16,28 +12,24 @@ export default function () {
     formState: { errors },
   } = useForm();
 
-  // state
-
-  function onSubmit(data) {
-    // user
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    // Check whether the user exists or not.
-    if (user && user.email === data.email && user.password === data.password) {
-      navigate("/dashboard");
-    } else {
+  useEffect(() => {
+    if (formHasError) {
       setError("root", {
         type: "unMatch",
         message: "Email or password is wrong",
       });
     }
+  }, [formHasError]);
+
+  function handleSubmitForm(data) {
+    onSubmitForm(data);
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-screen gap-y-4">
+    <div className="flex flex-col items-center justify-center ">
       <form
-        className="flex flex-col items-center justify-center gap-y-8 p-16 bg-white rounded-xl w-[500px]"
-        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col items-center justify-center gap-y-4 p-16 bg-white rounded-xl w-[500px]"
+        onSubmit={handleSubmit(handleSubmitForm)}
       >
         {errors.root && <BaseInputErrors error={errors.root.message} />}
 
@@ -74,7 +66,6 @@ export default function () {
           <button className="button ">Loin</button>
         </div>
       </form>
-      <Link to="/auth/register">Register</Link>
     </div>
   );
 }

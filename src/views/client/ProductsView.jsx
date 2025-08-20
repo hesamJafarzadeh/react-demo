@@ -33,7 +33,9 @@ export default () => {
     <div>
       <p className="flex items-center justify-between text-2xl font-bold my-8 border-b border-gray-100 pb-4">
         Products
-        <span className="text-base">{products.length}</span>
+        <span className="text-base text-gray-400">
+          Total: {products.length} items
+        </span>
       </p>
       <ProductList products={products} />
     </div>

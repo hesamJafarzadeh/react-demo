@@ -48,9 +48,10 @@ export default function Header() {
 
         {/* auth actions */}
         <div className="flex  items-center gap-4">
+          {authContext.getUserFullName}
           {authContext.isLoggedIn ? (
             <button
-              onClick={authContext.logout}
+              onClick={authContext.handleLogout}
               className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition"
             >
               Logout

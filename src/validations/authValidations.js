@@ -14,6 +14,12 @@ export const loginValidationRules = {
 
 export const registerValidationRules = {
   ...loginValidationRules,
+  name: {
+    required: validationMessages.required,
+  },
+  family: {
+    required: validationMessages.required,
+  },
   passwordRepeat: (password) => ({
     required: validationMessages.required,
     validate: (value) =>
